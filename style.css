@@ -1,0 +1,246 @@
+*,
+body {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+body {
+    background-color: skyblue;
+}
+
+#townhouse {
+    /*background-image: url(http://morethanestates.co.uk/wp-content/themes/realhomes/images/background-outer-wrapper.png);*/
+    background-image: url(https://www.pc275.com/imgs/footers/PC275-careers-in-realestate-shadow.png);
+    /*background-image: url(http://anqa.ae/blog/wp-content/themes/anqa/images/m_footer_buildings2.png);*/
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    height: 150px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    -webkit-animation: marquee 50s infinite linear;
+}
+
+@-webkit-keyframes marquee {
+    0% {
+        background-position: 0;
+    }
+    100% {
+        background-position: -1190px;
+    }
+}
+
+#time {
+    float: right;
+}
+
+#clock table {
+    float: right;
+}
+
+#time,
+#countdown {
+    font-size: 90.3px;
+    font-weight: bold;
+}
+
+#time,
+#clock {
+    color: #fff;
+    width: 49.8%;
+    display: inline-block;
+    float: left;
+}
+
+#countdown {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    margin: 20px auto;
+    background: #fff;
+    color: #000;
+}
+
+div.dig {
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    font-family: arial, verdana, sans-serif;
+    font-size: 10px;
+    color: #000000;
+    text-align: center;
+    padding-top: 10px;
+}
+
+div.dig,
+div.hour,
+div.min,
+div.sec {
+    color: #fff;
+    position: absolute;
+}
+
+div.sec {
+    background: red;
+}
+
+div.min {
+    background: blue;
+}
+
+div.hour {
+    background: green;
+}
+
+div.hour,
+div.min,
+div.sec {
+    width: 2px;
+    height: 2px;
+    font-size: 2px;
+}
+
+#batt,
+#smile {
+    margin: 10px;
+    font-size: 48px;
+}
+
+marquee {
+    background: rgba(255, 255, 255, 0.1);
+    color: #000;
+    position: absolute;
+    bottom: 0;
+    font-size: 18px;
+}
+
+.flake {
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+    /*  add color --- animation: random 50s infinite;
+    -webkit-animation: random 50s infinite;*/
+}
+
+@keyframes random {
+    15% {
+        color: red;
+    }
+    30% {
+        color: yellow;
+    }
+    45% {
+        color: green;
+    }
+    60% {
+        color: blue;
+    }
+    75% {
+        color: white;
+    }
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+#type {
+    color: #fff;
+}
+
+.sun {
+    height: 90px;
+    width: 90px;
+    z-index: 30;
+    border-radius: 50%;
+    box-shadow: 0px 0px 50px #FDB813, 0px 0px 50px #FDB813, 0px 0px 50px #FDB813;
+    margin: 0 auto;
+    background: transparent;
+    background-image: radial-gradient(#FFB813 10%, #FDB813 90%);
+    border: none;
+    animation-name: rotate;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    transform-origin: 50% 1000%;
+    animation-delay: .3s;
+}
+
+.container {
+    background: #000;
+    overflow: hidden;
+    animation-name: backgr;
+    animation-duration: 4s;
+    animation-delay: 2.3s;
+    animation-iteration-count: infinite;
+    background: #0c1317;
+}
+
+body {
+    margin: 0
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.ground {
+    height: 150px;
+    width: 150%;
+    background: -webkit-linear-gradient(left, #005C09, #02680A, #047B0C, #518E0E, #78261f);
+    float: bottom;
+    margin-top: 400px;
+    border-top-left-radius: 60%;
+    border-top-right-radius: 60%;
+    margin-left: -20px;
+}
+
+.moon {
+    height: 80px;
+    width: 80px;
+    z-index: 20;
+    border-radius: 50%;
+    box-shadow: 0px 0px 35px #FFF, 0px 0px 35px #FFF, 0px 0px 30px #FFF;
+    margin: 0 auto;
+    background-color: #fff;
+    border: none;
+    animation-name: rotate;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-delay: 2.3s;
+    transform-origin: 50% 1000%;
+    margin-top: -86px;
+}
+
+@keyframes backgr {
+    50% {
+        background: rgb(126, 192, 238);
+    }
+    100% {
+        background: #0c1317;
+    }
+}
+
+#canvas {
+    position: absolute;
+    z-index: -99999;
+}
