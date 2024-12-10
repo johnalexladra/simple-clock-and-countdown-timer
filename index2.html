@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Countdown</title>
+    <style>
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f5f5f5;
+        }
+        #time {
+            font-size: 40px;
+            margin: 20px;
+        }
+        #countdown {
+            font-size: 30px;
+            margin-top: 20px;
+        }
+        #marquee {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        #startTimeInput, #endTimeInput {
+            font-size: 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <label for="startTimeInput">Start Time (HH:MM): </label>
+        <input type="time" id="startTimeInput" value="09:00">
+    </div>
+
+    <div>
+        <label for="endTimeInput">End Time (HH:MM): </label>
+        <input type="time" id="endTimeInput" value="17:00">
+    </div>
+
+    <button onclick="startCountdown()">Start Countdown</button>
+
+    <div id="time"></div>
+    <div id="countdown"></div>
+    <div id="marquee"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.fireworks.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/snowfall.js"></script>
+    <script>
+        var flag = 0;
+        var startTime, endTime, diff, countdownInterval;
+
+        function startCountdown() {
+            // Get the start and end times from the inputs
+            var startTimeInput = document.getElementById('startTimeInput').value;
+            var endTimeInput = document.getElementById('endTimeInput').value;
+
+            // Parse start and end times to Date objects
+            var today = new Date();
+            var startParts = startTimeInput.split(':');
+            var endParts = endTimeInput.split(':');
+
+            startTime = new Date(today);
+            startTime.setHours(parseInt(startParts[0]), parseInt(startParts[1]), 0, 0);
+
+            endTime = new Date(today);
+            endTime.setHours(parseInt(endParts[0]), parseInt(endParts[1]), 0, 0);
+
+            // Adjust for endTime in case it's before startTime (if end is the next day)
+            if (endTime < startTime) {
+                endTime.setDate(endTime.getDate() + 1);
+            }
+
+            // Start the countdown
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        function updateCountdown() {
+            var now = new Date();
+            var timeLeft = endTime - now;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "Congratulations! You are FREE now!";
+                if (flag === 0) {
+                    fireworksDisplay();
+                    flag = 1;
+                }
+                return;
+            }
+
+            // Calculate the remaining time
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = "Your Shift will END in " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            // Calculate the current time
+            var hrs = now.getHours();
+            var mins = now.getMinutes();
+            var secs = now.getSeconds();
+            mins = checkTime(mins);
+            secs = checkTime(secs);
+
+            // Display current time
+            if (hrs == 0) {
+                document.getElementById('time').innerHTML = "12" + ":" + mins + ":" + secs + " MN";
+            } else if (hrs < 12) {
+                document.getElementById('time').innerHTML = hrs + ":" + mins + ":" + secs + " AM";
+            } else if (hrs == 12) {
+                document.getElementById('time').innerHTML = "12" + ":" + mins + ":" + secs + " NN";
+            } else {
+                document.getElementById('time').innerHTML = hrs % 12 + ":" + mins + ":" + secs + " PM";
+            }
+
+            // Update reminder
+            var hrsForReminder = new Date().getHours();
+            if (hrsForReminder > 12) {
+                document.getElementById("marquee").innerHTML = "Reminder : Your First 15mins Break will Start in " + (23 - hrsForReminder) + "h " + minutes + "m " + seconds + "s ";
+            } else if (hrsForReminder > 0 && hrsForReminder < 3) {
+                document.getElementById("marquee").innerHTML = "Reminder : Your One Hour Break will Start in " + (1 - hrsForReminder) + "h " + minutes + "m " + seconds + "s ";
+            } else if (hrsForReminder >= 3) {
+                document.getElementById("marquee").innerHTML = "Reminder : Your Last 15mins Break will Start in " + (4 - hrsForReminder) + "h " + minutes + "m " + seconds + "s ";
+            } else {
+                document.getElementById("marquee").innerHTML = "Reminder : No more breaks available for today...";
+            }
+        }
+
+        function fireworksDisplay() {
+            $('.demo').fireworks({
+                sound: true,
+                opacity: 0.7,
+                width: '100%',
+                height: '100%'
+            });
+            $.snowfall.stop();
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i; // Add zero in front of numbers < 10
+            }
+            return i;
+        }
+
+        function snowFall() {
+            $.snowfall.start({
+                size: {
+                    min: 10,
+                    max: 20
+                },
+                color: '#fff',
+                content: '&#10052;',
+                interval: 500,
+                disappear: 'linear'
+            });
+        }
+
+        snowFall();
+    </script>
+</body>
+</html>
